@@ -4,7 +4,7 @@ const port = 3000;
 const postsRouter = require('./routers/posts')
 
 
-// create first route 
+// create first route (welcome route)
 app.get('/', (req, res) => {
     res.send('Welcome on express-blog-api-server');
 })
@@ -16,7 +16,7 @@ app.use('/api/posts', postsRouter)
 //////////// END ROUTES POSTS ///////////
 
 
-// start the server 
+// start the server .listen
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 })
