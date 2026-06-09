@@ -17,6 +17,7 @@ const index = (req, res) => {
 
 const show = (req, res) => {
     // res.json({ message: "read a single post" })
+
     const postId = parseInt(req.params.id)
 
     // find single post by comparing the id
@@ -31,7 +32,13 @@ const show = (req, res) => {
 }
 
 const store = (req, res) => {
-    res.json({ message: "create a new post" })
+    // res.json({ message: "create a new post" })
+
+    console.log(req.body) // su Postman { titolo: "sfogliatella", contenuto: "La sfogliatella è un dolce tipico...", immagine: "http://localhost:3000/images/torta_paesana.jpeg", tags: ["cucina", "ricette", "dolci"] }
+
+    // create a new id for the new post
+    const newId = posts[posts.lenght - 1].id + 1 // prendiamo l'ultimo id già presente e lo incrementiamo di 1
+
 }
 
 const update = (req, res) => {
@@ -44,6 +51,7 @@ const modify = (req, res) => {
 
 const destroy = (req, res) => {
     // res.json({ message: "delete a post" })
+
     const postId = parseInt(req.params.id)
     // find single post by comparing the id (same as show)
     const thisPost = posts.find(post => post.id === postId)
