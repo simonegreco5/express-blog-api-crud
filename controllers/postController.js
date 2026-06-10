@@ -34,11 +34,28 @@ const show = (req, res) => {
 const store = (req, res) => {
     // res.json({ message: "create a new post" })
 
-    console.log(req.body) // su Postman { titolo: "sfogliatella", contenuto: "La sfogliatella è un dolce tipico...", immagine: "http://localhost:3000/images/torta_paesana.jpeg", tags: ["cucina", "ricette", "dolci"] }
+    console.log(req.body) // { titolo: "sfogliatella", contenuto: "La sfogliatella è un dolce tipico...", immagine: "http://localhost:3000/images/torta_paesana.jpeg", tags: ["cucina", "ricette", "dolci"] }
 
     // create a new id for the new post
-    const newId = posts[posts.lenght - 1].id + 1 // prendiamo l'ultimo id già presente e lo incrementiamo di 1
+    const newId = posts[posts.length - 1].id + 1 // prendiamo l'ultimo id già presente e lo incrementiamo di 1
 
+    // create the new post object
+    const newPost = {
+        id: newId,
+        ...req.body
+        // in alternativa allo spred (...req.body)
+        // titolo: req.body.titolo
+        // contenuto: req.body.contenuto
+        // immagine: req.body.immagine
+        // tags: req.body.tags
+    }
+
+    console.log(newPost) // check in terminal the new post object
+
+    // push newPost in the posts array
+    posts.push(newPost)
+
+    res.status(201).json({ message: "post added", newPost })
 }
 
 const update = (req, res) => {

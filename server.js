@@ -3,6 +3,12 @@ const app = express();
 const port = 3000;
 const postsRouter = require('./routers/posts')
 
+// middlware per servire i file statici della cartella pubblic
+app.use(express.static('public'))
+
+// middlware per parsare il body della richiesta in formato json
+app.use(express.json())
+
 
 // create first route (welcome route)
 app.get('/', (req, res) => {
