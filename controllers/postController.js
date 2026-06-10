@@ -64,7 +64,10 @@ const update = (req, res) => {
     const postId = parseInt(req.params.id)
     const thisPost = posts.find(post => post.id === postId)
 
-    
+    // if id post not exist show error 404
+    if (!thisPost) {
+        req.status(404).json({ error: true, message: "post not found" })
+    }
 
     // update the post properties with the request body data
     thisPost.titolo = req.body.titolo || thisPost.titolo
