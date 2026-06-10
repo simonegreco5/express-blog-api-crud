@@ -59,7 +59,25 @@ const store = (req, res) => {
 }
 
 const update = (req, res) => {
-    res.json({ message: "update a post" })
+    // res.json({ message: "update a post" })
+
+    const postId = parseInt(req.params.id)
+    const thisPost = posts.find(post => post.id === postId)
+
+    
+
+    // update the post properties with the request body data
+    thisPost.titolo = req.body.titolo || thisPost.titolo
+    thisPost.contenuto = req.body.contenuto || thisPost.contenuto
+    thisPost.immagine = req.body.immagine || thisPost.immagine
+    thisPost.tags = req.body.tags || thisPost.tags
+    // ( || thisPost.chiave ) è facoltativo, serve a restituire il valore precedente 
+    // ossia quello non modificato, qualora quello modificato non esiste
+
+    console.log(thisPost) // chek update post in the terminal
+
+    res.json(thisPost)
+    
 }
 
 const modify = (req, res) => {
