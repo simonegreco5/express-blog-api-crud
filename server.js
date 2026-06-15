@@ -6,6 +6,8 @@ const postsRouter = require('./routers/posts');
 const serverError = require('./middlewares/serverError');
 // import function of middleware server error 404
 const notFound = require('./middlewares/notFound');
+// import function of middleware server checkAiKey
+const checkApiKey = require('./middlewares/checkApikey');
 
 // middlware per servire i file statici della cartella pubblic
 app.use(express.static('public'))
@@ -20,8 +22,9 @@ app.get('/', (req, res) => {
 })
 
 /////////// ROUTES POSTS ///////////
+// middleware checkApiKey
+app.use('/api/posts', checkApiKey, postsRouter)
 
-app.use('/api/posts', postsRouter)
 
 //////////// END ROUTES POSTS ///////////
 
@@ -37,7 +40,6 @@ app.use(serverError) // oppure cosi importando la funzione dalla cartella middle
 //     res.status(404).json({ error: true, message: "404 not found"})
 // })
 app.use(notFound) // oppure cosi importando la funzione dalla cartella middleware
-
 
 // start the server .listen
 app.listen(port, () => {
